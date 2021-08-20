@@ -1,5 +1,7 @@
 ﻿using CourseRegistration.Data.Interfaces;
+using CourseRegistration.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -46,6 +48,19 @@ namespace CourseRegistration.Controllers
                 return new List<string> { "No Student found" };
             }
             return res;
+        }
+        public ActionResult Create()
+        {
+            ViewBag.Courses =
+                new SelectList(_courseRepo.GetAllCourses().ToList(),
+                "Course Id", "Course Name");
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Create(Students student)
+        {
+            _studentRepo.CreateStudent(student);
+            return RedirectToAction(nameof(Index));
         }
     }
 }

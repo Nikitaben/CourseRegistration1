@@ -20,6 +20,10 @@ namespace CourseRegistration.Data.MockRepo
             new Students {StudentId = 006, FirstName = "Tommy", LastName = "Lee", EmailAddress = "tommylee@gmail.com",PhoneNumber = "4785684564", CourseId = 1002},
 
         };
+        public void CreateStudent(Students input)
+        {
+            _students.Add(input);
+        }
             public IEnumerable<Students> GetAllStudents()
             {
                 return _students;

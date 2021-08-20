@@ -17,6 +17,13 @@ namespace CourseRegistration.Data.MockRepo
 
         };
 
+        public void CreateCourse(Courses input)
+        {
+            int id = _courses.Max(c => c.CourseId) + 1;
+            input.CourseId = id;
+            _courses.Add(input);
+        }
+
         public IEnumerable<Courses> GetAllCourses()
         {
             return _courses;
