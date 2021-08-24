@@ -1,5 +1,4 @@
-﻿@model IEnumerable<Courses>
-
+﻿@model IEnumerable<CourseRegistration.ModelsDto.CourseDto>
 @{
     ViewData["Title"] = "Index";
 }
@@ -52,8 +51,8 @@
                     @Html.DisplayFor(modelItem => item.Description)
                 </td>
                 <td>
-                    @*@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Edit", "Edit", new { id=item.CourseId }) |
+                       @*@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
                         @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
                 </td>
             </tr>

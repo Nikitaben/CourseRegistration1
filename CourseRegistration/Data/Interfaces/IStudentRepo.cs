@@ -10,5 +10,8 @@ namespace CourseRegistration.Data.Interfaces
     {
         IEnumerable<Students> GetAllStudents();
         void CreateStudent(Students input);
+        Students GetStudentsById(int id);
+        void UpdateStudents(Students input);
+        bool SaveChanges();
     }
 }

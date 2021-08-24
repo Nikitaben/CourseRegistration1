@@ -1,8 +1,10 @@
 using CourseRegistration.Data.Interfaces;
 using CourseRegistration.Data.MockRepo;
+using CourseRegistration.Data.SqlRepo;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -26,9 +28,17 @@ namespace CourseRegistration
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddDbContext<AppDbContext>(options =>
+            {
+                var connectionString = Configuration.GetConnectionString("Default");
+                options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
+
+            });
             services.AddScoped<IInstructorRepo, MockInstructorRepo>();
-            services.AddScoped<IStudentRepo, MockStudentRepo>();
-            services.AddScoped<ICourseRepo, MockCourseRepo>();
+           // services.AddScoped<IStudentRepo, MockStudentRepo>();
+            services.AddScoped<IStudentRepo, SqlStudentRepo>();
+            //.AddScoped<ICourseRepo, MockCourseRepo>();
+            services.AddScoped<ICourseRepo, SqlCourseRepo>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

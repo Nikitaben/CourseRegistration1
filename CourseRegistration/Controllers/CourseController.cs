@@ -1,5 +1,7 @@
-﻿using CourseRegistration.Data.Interfaces;
+﻿using CourseRegistration.Data;
+using CourseRegistration.Data.Interfaces;
 using CourseRegistration.Models;
+using CourseRegistration.ModelsDto;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -11,14 +13,17 @@ namespace CourseRegistration.Controllers
     public class CourseController : Controller
     {
         private ICourseRepo _courseRepo;
-
+        private readonly Mapper _mapper = new Mapper();
         public CourseController(ICourseRepo courseRepo)
         {
             _courseRepo = courseRepo;
         }
         public IActionResult Index()
         {
-            return View(_courseRepo.GetAllCourses());
+            var list = _courseRepo.GetAllCourses()
+                .Select(c => _mapper.Map(c))
+                .ToList();
+            return View(list);
         }
         public IEnumerable<string> GetStudentsByStudentId(int? id)
         {
@@ -31,15 +36,32 @@ namespace CourseRegistration.Controllers
             }
             return res;
         }
+
         public ActionResult Create()
         {
+           
             return View();
         }
         [HttpPost]
         public ActionResult Create(Courses input)
         {
             _courseRepo.CreateCourse(input);
+            _courseRepo.SaveChanges();
+            return RedirectToAction(nameof(Index));
+        }
+
+        public ActionResult Edit(int id)
+        {
+            var c = _mapper.Map(_courseRepo.GetCoursesById(id));
+            return View(c);
+        }
+        [HttpPost]
+        public ActionResult Edit(CourseDto courses)
+        {
+            _courseRepo.UpdateCourse(_mapper.Map(courses));
+            _courseRepo.SaveChanges();
             return RedirectToAction(nameof(Index));
         }
     }
+
 }

@@ -1,5 +1,7 @@
-﻿using CourseRegistration.Data.Interfaces;
+﻿using CourseRegistration.Data;
+using CourseRegistration.Data.Interfaces;
 using CourseRegistration.Models;
+using CourseRegistration.ModelsDto;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
@@ -13,6 +15,7 @@ namespace CourseRegistration.Controllers
     {
         private IStudentRepo _studentRepo;
         private ICourseRepo _courseRepo;
+        private readonly Mapper _mapper = new Mapper();
 
         public StudentController(IStudentRepo studentRepo, ICourseRepo courseRepo)
         {
@@ -34,7 +37,7 @@ namespace CourseRegistration.Controllers
                         };
                     return c;
                 })
-                
+                .Select(s => _mapper.Map(s))
                 .ToList();
             return View(students);
         }
@@ -51,15 +54,37 @@ namespace CourseRegistration.Controllers
         }
         public ActionResult Create()
         {
+            var list = _courseRepo.GetAllCourses()
+                .Select(s => _mapper.Map(s))
+                .ToList();
             ViewBag.Courses =
-                new SelectList(_courseRepo.GetAllCourses().ToList(),
-                "Course Id", "Course Name");
+                new SelectList(list, "CourseId", "C_Name");
             return View();
         }
         [HttpPost]
-        public ActionResult Create(Students student)
+        public ActionResult Create(StudentDto input)
         {
-            _studentRepo.CreateStudent(student);
+            _studentRepo.CreateStudent(_mapper.Map(input));
+            _studentRepo.SaveChanges();
+            return RedirectToAction(nameof(Index));
+        }
+        public ActionResult Edit(int id)
+        {
+            var list = _courseRepo.GetAllCourses()
+                .Select(s => _mapper.Map(s))
+                .ToList();
+                        ViewBag.Courses =
+                new SelectList(list,
+               "CourseId", "C_Name");
+            var s = _mapper.Map(_studentRepo.GetStudentsById(id));
+            return View(s);
+        }
+        [HttpPost]
+       
+        public ActionResult Edit(StudentDto student)
+        {
+            _studentRepo.UpdateStudents(_mapper.Map(student));
+            _studentRepo.SaveChanges();
             return RedirectToAction(nameof(Index));
         }
     }

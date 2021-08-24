@@ -24,9 +24,36 @@ namespace CourseRegistration.Data.MockRepo
         {
             _students.Add(input);
         }
-            public IEnumerable<Students> GetAllStudents()
+        public IEnumerable<Students> GetAllStudents()
             {
                 return _students;
+            }
+
+        public Students GetStudentsById(int id)
+        {
+            
+            return _students.FirstOrDefault(s => s.StudentId == id);
+        }
+
+        public bool SaveChanges()
+        {
+            return true;
+        }
+
+        public void UpdateStudents(Students input)
+        {
+            var itemInTheList = _students.FirstOrDefault(s =>s.StudentId == input.StudentId);
+
+            if (itemInTheList != null)
+            {
+                //itemInTheList.StudentId = input.StudentId;
+                itemInTheList.FirstName = input.FirstName;
+                itemInTheList.LastName = input.LastName;
+                itemInTheList.EmailAddress = input.EmailAddress;
+                itemInTheList.PhoneNumber = input.PhoneNumber;
+                itemInTheList.CourseId = input.CourseId;
+
+            }
             }
     }
     

@@ -28,5 +28,27 @@ namespace CourseRegistration.Data.MockRepo
         {
             return _courses;
         }
+
+        public Courses GetCoursesById(int id)
+        {
+            return _courses.FirstOrDefault(c => c.CourseId == id);
+        }
+
+        public bool SaveChanges()
+        {
+            return true;
+        }
+
+        public void UpdateCourse(Courses input)
+        {
+            var itemInTheList = _courses.FirstOrDefault(c => c.CourseId == input.CourseId);
+            if (itemInTheList != null)
+            {
+                itemInTheList.CourseId = input.CourseId;
+                itemInTheList.C_Name = input.C_Name;
+                itemInTheList.C_Number = input.C_Number;
+                itemInTheList.Description = input.Description;
+            }
+        }
     }
 }

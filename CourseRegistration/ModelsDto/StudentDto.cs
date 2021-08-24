@@ -6,26 +6,32 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CourseRegistration.Models
+namespace CourseRegistration.ModelsDto
 {
-    public class Students
+    public class StudentDto
     {
-       
-        [Key]
+        [DisplayName("S_Id")]
+        
         public int StudentId { get; set; }
 
-       
+        [DisplayName("F_Name")]
+        [Required]
         public string FirstName { get; set; }
 
+        [DisplayName("L_Name")]
+        [Required]
         public string LastName { get; set; }
 
+        [DisplayName("E_Address")]
         public string EmailAddress { get; set; }
 
+        [DisplayName("Phone #")]
+        [Required]
         public string PhoneNumber { get; set; }
 
-      
+        [DisplayName("Courses")]
         [ForeignKey("Courses")]
         public int? CourseId { get; set; }
-        public Courses Courses { get; set; }
+        public CourseDto Courses { get; set; }
     }
 }
