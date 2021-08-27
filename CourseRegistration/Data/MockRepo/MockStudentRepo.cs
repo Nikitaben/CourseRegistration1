@@ -10,26 +10,26 @@ namespace CourseRegistration.Data.MockRepo
     public class MockStudentRepo : IStudentRepo
     {
         
-        private readonly static List<Students> _students = new List<Students>
+        private readonly static List<Student> _students = new List<Student>
         {
-            new Students {StudentId = 001, FirstName = "Danial", LastName = "Para", EmailAddress = "danialpara@gmail.com", PhoneNumber = "5879207077", CourseId = 1001 },
-            new Students {StudentId = 002, FirstName = "Parker", LastName = "James", EmailAddress = "parkerjames@gmail.com", PhoneNumber = "7809304545", CourseId = 1002},
-            new Students {StudentId = 003, FirstName = "Robin", LastName = "Smith", EmailAddress = "robinsmith@gmail.com",PhoneNumber = "6785674564", CourseId = 1003},
-            new Students {StudentId = 004, FirstName = "Sura", LastName = "Tandan", EmailAddress = "suratandan@gmail.com",PhoneNumber = "2785674504", CourseId = 1003},
-            new Students {StudentId = 005, FirstName = "Samuel", LastName = "Johnson", EmailAddress = "samueljohnson@gmail.com",PhoneNumber = "6785644560", CourseId = 1001},
-            new Students {StudentId = 006, FirstName = "Tommy", LastName = "Lee", EmailAddress = "tommylee@gmail.com",PhoneNumber = "4785684564", CourseId = 1002},
+            new Student {StudentId = 001, FirstName = "Danial", LastName = "Para", EmailAddress = "danialpara@gmail.com", PhoneNumber = "5879207077" },
+            new Student {StudentId = 002, FirstName = "Parker", LastName = "James", EmailAddress = "parkerjames@gmail.com", PhoneNumber = "7809304545"},
+            new Student {StudentId = 003, FirstName = "Robin", LastName = "Smith", EmailAddress = "robinsmith@gmail.com",PhoneNumber = "6785674564"},
+            new Student {StudentId = 004, FirstName = "Sura", LastName = "Tandan", EmailAddress = "suratandan@gmail.com",PhoneNumber = "2785674504"},
+            new Student {StudentId = 005, FirstName = "Samuel", LastName = "Johnson", EmailAddress = "samueljohnson@gmail.com",PhoneNumber = "6785644560"},
+            new Student {StudentId = 006, FirstName = "Tommy", LastName = "Lee", EmailAddress = "tommylee@gmail.com",PhoneNumber = "4785684564" }
 
         };
-        public void CreateStudent(Students input)
+        public void CreateStudent(Student input)
         {
             _students.Add(input);
         }
-        public IEnumerable<Students> GetAllStudents()
+        public IEnumerable<Student> GetAllStudents()
             {
                 return _students;
             }
 
-        public Students GetStudentsById(int id)
+        public Student GetStudentsById(int id)
         {
             
             return _students.FirstOrDefault(s => s.StudentId == id);
@@ -40,7 +40,7 @@ namespace CourseRegistration.Data.MockRepo
             return true;
         }
 
-        public void UpdateStudents(Students input)
+        public void UpdateStudents(Student input)
         {
             var itemInTheList = _students.FirstOrDefault(s =>s.StudentId == input.StudentId);
 
@@ -51,8 +51,7 @@ namespace CourseRegistration.Data.MockRepo
                 itemInTheList.LastName = input.LastName;
                 itemInTheList.EmailAddress = input.EmailAddress;
                 itemInTheList.PhoneNumber = input.PhoneNumber;
-                itemInTheList.CourseId = input.CourseId;
-
+              
             }
             }
     }

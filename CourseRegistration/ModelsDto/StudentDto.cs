@@ -10,23 +10,20 @@ namespace CourseRegistration.ModelsDto
 {
     public class StudentDto
     {
-        [DisplayName("S_Id")]
         
+        [Key]
         public int StudentId { get; set; }
 
-        [DisplayName("F_Name")]
-        [Required]
+        
         public string FirstName { get; set; }
 
-        [DisplayName("L_Name")]
-        [Required]
+        
         public string LastName { get; set; }
 
-        [DisplayName("E_Address")]
+        
         public string EmailAddress { get; set; }
 
-        [DisplayName("Phone #")]
-        [Required]
+        
         public string PhoneNumber { get; set; }
 
         [DisplayName("Courses")]

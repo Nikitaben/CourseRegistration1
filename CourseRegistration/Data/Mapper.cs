@@ -9,9 +9,9 @@ namespace CourseRegistration.Data
 {
     public class Mapper
     {
-        public Courses Map(CourseDto input)
+        public Course Map(CourseDto input)
         {
-            return new Courses { 
+            return new Course { 
                 CourseId = input.CourseId,
                 C_Name = input.C_Name,
                 C_Number = input.C_Number,
@@ -19,7 +19,7 @@ namespace CourseRegistration.Data
 
             };
         }
-        public CourseDto Map(Courses input)
+        public CourseDto Map(Course input)
         {
             return new CourseDto
             {
@@ -30,20 +30,20 @@ namespace CourseRegistration.Data
 
             };
         }
-        public Students Map(StudentDto input)
+        public Student Map(StudentDto input)
         {
-            return new Students
+            return new Student
             {
                 StudentId = input.StudentId,
                 FirstName = input.FirstName,
                 LastName = input.LastName,
                 EmailAddress = input.EmailAddress,
                 PhoneNumber = input.PhoneNumber,
-                CourseId = input.CourseId,
+                //CourseId = input.CourseId,
 
             };
         }
-        public StudentDto Map(Students input)
+        public StudentDto Map(Student input)
         {
             return new StudentDto
             {
@@ -52,13 +52,13 @@ namespace CourseRegistration.Data
                 LastName = input.LastName,
                 EmailAddress = input.EmailAddress,
                 PhoneNumber = input.PhoneNumber,
-                CourseId = input.CourseId,
-                Courses = Map(input.Courses)
+                //CourseId = input.CourseId,
+                //Courses = Map(input.Course)
             };
         }
-        public Instructors Map(InstructorDto input)
+        public Instructor Map(InstructorDto input)
         {
-            return new Instructors
+            return new Instructor
             {
                 I_Id = input.I_Id,
                 FirstName = input.FirstName,
@@ -68,7 +68,7 @@ namespace CourseRegistration.Data
 
             };
         }
-        public InstructorDto Map(Instructors input)
+        public InstructorDto Map(Instructor input)
         {
             return new InstructorDto
             {
@@ -77,7 +77,7 @@ namespace CourseRegistration.Data
                 LastName = input.LastName,
                 EmailAddress = input.EmailAddress,
                 CourseId = input.CourseId,
-                Course = Map(input.Courses)
+                Course = Map(input.Course)
             };
         }
 

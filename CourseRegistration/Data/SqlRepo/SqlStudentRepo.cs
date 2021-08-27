@@ -15,19 +15,19 @@ namespace CourseRegistration.Data.SqlRepo
         {
             _context = context;
         }
-        public void CreateStudent(Students input)
+        public void CreateStudent(Student input)
         {
             if (input == null)
             throw new NotImplementedException(nameof(input));
             _context.Students.Add(input);
         }
 
-        public IEnumerable<Students> GetAllStudents()
+        public IEnumerable<Student> GetAllStudents()
         {
             return _context.Students.ToList();
         }
 
-        public Students GetStudentsById(int id)
+        public Student GetStudentsById(int id)
         {
             return _context.Students.FirstOrDefault(s => s.StudentId == id);
         }
@@ -37,7 +37,7 @@ namespace CourseRegistration.Data.SqlRepo
             return _context.SaveChanges() >= 0;
         }
 
-        public void UpdateStudents(Students input)
+        public void UpdateStudents(Student input)
         {
 
             var itemInTheList = _context.Students.FirstOrDefault(s => s.StudentId == input.StudentId);
@@ -49,7 +49,7 @@ namespace CourseRegistration.Data.SqlRepo
                 itemInTheList.LastName = input.LastName;
                 itemInTheList.EmailAddress = input.EmailAddress;
                 itemInTheList.PhoneNumber = input.PhoneNumber;
-                itemInTheList.CourseId = input.CourseId;
+                
             }
         }
     }

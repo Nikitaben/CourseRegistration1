@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CourseRegistration.Models
 {
-    public class Students
+    public class Student
     {
        
         [Key]
@@ -23,9 +23,7 @@ namespace CourseRegistration.Models
 
         public string PhoneNumber { get; set; }
 
-      
-        [ForeignKey("Courses")]
         public int? CourseId { get; set; }
-        public Courses Courses { get; set; }
+    //    public Course Course { get; set; }
     }
 }

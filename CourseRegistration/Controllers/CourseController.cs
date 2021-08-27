@@ -25,25 +25,14 @@ namespace CourseRegistration.Controllers
                 .ToList();
             return View(list);
         }
-        public IEnumerable<string> GetStudentsByStudentId(int? id)
-        {
-            var res = _courseRepo.GetAllCourses()
-                .Where(c => c.CourseId == id)
-                .Select(c => c.C_Name + "\n");
-            if(res == null || res.Count() == 0)
-            {
-                return new List <string> { "No Student found" };
-            }
-            return res;
-        }
-
+       
         public ActionResult Create()
         {
            
             return View();
         }
         [HttpPost]
-        public ActionResult Create(Courses input)
+        public ActionResult Create(Course input)
         {
             _courseRepo.CreateCourse(input);
             _courseRepo.SaveChanges();
@@ -56,9 +45,9 @@ namespace CourseRegistration.Controllers
             return View(c);
         }
         [HttpPost]
-        public ActionResult Edit(CourseDto courses)
+        public ActionResult Edit(CourseDto course)
         {
-            _courseRepo.UpdateCourse(_mapper.Map(courses));
+            _courseRepo.UpdateCourse(_mapper.Map(course));
             _courseRepo.SaveChanges();
             return RedirectToAction(nameof(Index));
         }

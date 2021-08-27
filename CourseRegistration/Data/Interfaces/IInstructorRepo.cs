@@ -8,10 +8,10 @@ namespace CourseRegistration.Data.Interfaces
 {
     public interface IInstructorRepo
     {
-        IEnumerable<Instructors> GetAllInstructors();
-        Instructors GetInstructorsById(int id);
-        void CreateInstructor(Instructors input);
-        void UpdateInstructor(Instructors input);
+        IEnumerable<Instructor> GetAllInstructors();
+        Instructor GetInstructorsById(int id);
+        void CreateInstructor(Instructor input);
+        void UpdateInstructor(Instructor input);
         bool SaveChanges();
 
     }

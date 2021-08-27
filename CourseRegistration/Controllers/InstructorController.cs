@@ -24,13 +24,13 @@ namespace CourseRegistration.Controllers
         }
         public IActionResult Index()
         {
-            var courses = _courseRepo.GetAllCourses();
+            var course = _courseRepo.GetAllCourses();
             var instructors = _instructorRepo.GetAllInstructors()
                 .Select(c =>
                 {
-                    c.Courses = courses
+                    c.Course = course
                     .Where(i => i.CourseId == c.CourseId)
-                    .FirstOrDefault() ?? new Courses
+                    .FirstOrDefault() ?? new Course
                     {
                         C_Name = "n/a"
                     };
@@ -47,7 +47,7 @@ namespace CourseRegistration.Controllers
             var list = _courseRepo.GetAllCourses()
                 .Select(i => _mapper.Map(i))
                 .ToList();
-            ViewBag.Courses = new SelectList(list, "CourseId", "C_Name");
+            ViewBag.Course = new SelectList(list, nameof(CourseDto.CourseId),nameof(CourseDto.C_Name));
                 var i = _instructorRepo.GetInstructorsById(id);
             return View();
         }
@@ -63,7 +63,7 @@ namespace CourseRegistration.Controllers
             var list = _courseRepo.GetAllCourses()
               .Select(i => _mapper.Map(i))
               .ToList();
-            ViewBag.Courses = new SelectList(list, "CourseId", "C_Name");
+            ViewBag.Courses = new SelectList(list, nameof(CourseDto.CourseId), nameof(CourseDto.C_Name));
             var i = _instructorRepo.GetInstructorsById(id);
             return View(i);
         }

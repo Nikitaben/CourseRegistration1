@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CourseRegistration.Models
 {
-    public class Courses
+    public class Course
     {
         
         [Key]
