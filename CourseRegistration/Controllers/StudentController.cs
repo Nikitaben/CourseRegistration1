@@ -47,7 +47,7 @@ namespace CourseRegistration.Controllers
         public IEnumerable<string> GetStudentsByStudentId(int? id)
         {
             var res = _studentRepo.GetAllStudents()
-               .Where(c => c.CourseId == id)
+               //.Where(c => c.CourseId == id)
                 .Select(c => $"{c.LastName} {c.FirstName}<br>");
             if (res == null || res.Count() == 0)
             {
@@ -67,9 +67,14 @@ namespace CourseRegistration.Controllers
         [HttpPost]
         public ActionResult Create(StudentDto input)
         {
-            _studentRepo.CreateStudent(_mapper.Map(input));
-            _studentRepo.SaveChanges();
-            return RedirectToAction(nameof(Index));
+            if (ModelState.IsValid)
+            {
+                _studentRepo.CreateStudent(_mapper.Map(input));
+                _studentRepo.SaveChanges();
+
+                return RedirectToAction(nameof(Index));
+            }
+            return View(input);
         }
         public ActionResult Edit(int id)
         {
@@ -88,7 +93,7 @@ namespace CourseRegistration.Controllers
         {
             _studentRepo.UpdateStudents(_mapper.Map(student));
             _studentRepo.SaveChanges();
-            return RedirectToAction(nameof(Index));
+            return View(student);
         }
         public ActionResult GetCourseStudentById(int id)
         {
@@ -112,6 +117,21 @@ namespace CourseRegistration.Controllers
                 StudentId = id
             };
                 return PartialView(scs);
+        }
+        public ActionResult SaveCourse(SaveCourseInStudentVM obj)
+        {
+            _courseStudentRepo.RemoveRange(obj.StudentId);
+            var toAdd = obj.Courses
+                .Where(c => c.IsActive)
+                .Select(sc => new CourseStudents
+                {
+                    StudentId = obj.StudentId,
+                    CourseId = sc.Id
+                });
+
+            _courseStudentRepo.AddRange(toAdd);
+            _courseStudentRepo.SaveChanges();
+            return RedirectToAction("Index");
         }
 
     }

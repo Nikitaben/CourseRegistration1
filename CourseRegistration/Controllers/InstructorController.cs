@@ -13,8 +13,8 @@ namespace CourseRegistration.Controllers
 {
     public class InstructorController : Controller
     {
-        private IInstructorRepo _instructorRepo;
-        private ICourseRepo _courseRepo;
+        private readonly IInstructorRepo _instructorRepo;
+        private readonly ICourseRepo _courseRepo;
         private readonly Mapper _mapper = new Mapper();
 
         public InstructorController(IInstructorRepo instructorRepo, ICourseRepo courseRepo)
@@ -42,6 +42,17 @@ namespace CourseRegistration.Controllers
                 .ToList();
             return View(instructors);
         }
+        public IEnumerable<string> GetInstructorsById(int? id)
+        {
+            var res = _instructorRepo.GetAllInstructors()
+                .Where(i => i.I_Id == id)
+                .Select(i => $"{i.LastName} {i.FirstName}<br>");
+            if (res == null || res.Count() == 0)
+            {
+                return new List<string> { "No Instructor found" };
+            }
+            return res;
+        }
         public ActionResult Create(int id)
         {
             var list = _courseRepo.GetAllCourses()
@@ -54,6 +65,7 @@ namespace CourseRegistration.Controllers
         [HttpPost]
         public ActionResult Create(InstructorDto input)
         {
+            if (ModelState.IsValid)
             _instructorRepo.CreateInstructor(_mapper.Map(input));
             _instructorRepo.SaveChanges();
             return RedirectToAction(nameof(Index));
@@ -64,7 +76,7 @@ namespace CourseRegistration.Controllers
               .Select(i => _mapper.Map(i))
               .ToList();
             ViewBag.Courses = new SelectList(list, nameof(CourseDto.CourseId), nameof(CourseDto.C_Name));
-            var i = _instructorRepo.GetInstructorsById(id);
+            var i = _mapper.Map(_instructorRepo.GetInstructorsById(id));
             return View(i);
         }
         [HttpPost]

@@ -26,9 +26,9 @@ namespace CourseRegistration.ModelsDto
         
         public string PhoneNumber { get; set; }
 
-        [DisplayName("Courses")]
-        [ForeignKey("Courses")]
-        public int? CourseId { get; set; }
-        public CourseDto Courses { get; set; }
+        //[DisplayName("Courses")]
+        //[ForeignKey("Courses")]
+        //public int? CourseId { get; set; }
+        //public CourseDto Courses { get; set; }
     }
 }

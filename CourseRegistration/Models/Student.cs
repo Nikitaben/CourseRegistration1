@@ -23,7 +23,7 @@ namespace CourseRegistration.Models
 
         public string PhoneNumber { get; set; }
 
-        public int? CourseId { get; set; }
+       // public int? CourseId { get; set; }
     //    public Course Course { get; set; }
     }
 }

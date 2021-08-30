@@ -1,5 +1,6 @@
 ﻿using CourseRegistration.Data.Interfaces;
 using CourseRegistration.Models;
+using CourseRegistration.ModelsDto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,8 +19,16 @@ namespace CourseRegistration.Data.SqlRepo
         public void CreateCourse(Course input)
         {
             if (input == null)
-            throw new NotImplementedException(nameof(input));
+            {
+
+                throw new NotImplementedException(nameof(input));
+            }
             _context.Courses.Add(input);
+        }
+
+        public void CreateCourse(CourseDto courseDto)
+        {
+            throw new NotImplementedException();
         }
 
         public IEnumerable<Course> GetAllCourses()

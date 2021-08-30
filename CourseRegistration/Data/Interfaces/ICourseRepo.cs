@@ -1,4 +1,5 @@
 ﻿using CourseRegistration.Models;
+using CourseRegistration.ModelsDto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,6 @@ namespace CourseRegistration.Data.Interfaces
         void CreateCourse(Course input);
         void UpdateCourse(Course input);
         bool SaveChanges();
-
+        void CreateCourse(CourseDto courseDto);
     }
 }

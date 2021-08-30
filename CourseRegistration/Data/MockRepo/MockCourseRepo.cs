@@ -1,5 +1,6 @@
 ﻿using CourseRegistration.Data.Interfaces;
 using CourseRegistration.Models;
+using CourseRegistration.ModelsDto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,6 +23,11 @@ namespace CourseRegistration.Data.MockRepo
             int id = _courses.Max(c => c.CourseId) + 1;
             input.CourseId = id;
             _courses.Add(input);
+        }
+
+        public void CreateCourse(CourseDto courseDto)
+        {
+            throw new NotImplementedException();
         }
 
         public IEnumerable<Course> GetAllCourses()

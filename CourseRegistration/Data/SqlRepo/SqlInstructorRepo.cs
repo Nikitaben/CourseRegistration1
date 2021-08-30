@@ -18,7 +18,9 @@ namespace CourseRegistration.Data.SqlRepo
         public void CreateInstructor(Instructor input)
         {
             if (input == null)
-            throw new NotImplementedException(nameof(input));
+            {
+                throw new NotImplementedException(nameof(input));
+            }
             _context.Instructors.Add(input);
         }
 

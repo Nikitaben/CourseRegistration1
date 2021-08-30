@@ -61,14 +61,15 @@
                 @*<td>
                         @Html.DisplayFor(modelItem => item.CourseId)
                     </td>*@
-                <td>
-                    <a href="#"
-                       data-toggle="modal" data-target="#exampleModal"
-                       onclick="addCourse(@item.StudentId, @item.FirstName, @item.LastName)">add Courses</a>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.StudentId }) |
-                    @*@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
-                </td>
+            <td>
+
+                @Html.ActionLink("Edit", "Edit", new { id = item.StudentId }) |
+                <a href="#"
+                   data-toggle="modal" data-target="#exampleModal"
+                   onclick='AddCourse(@item.StudentId, "@item.FirstName,@item.LastName")'>Add/Remove Course</a>
+                @*@Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
+            </td>
             </tr>
         }
     </tbody>
@@ -86,18 +87,21 @@
                 ...
             </div>
             @*<div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>*@
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>*@
         </div>
     </div>
 </div>
 
 <script>
-    function addCourse(id, FirstName, LastName)
-    const url = "@Url.Action("GetCourseByStudentById", "Student")/" + id;
-    $.get(url, function (data) {
-        console.log(data);
+    function AddCourse(id, FirstName, LastName) {
+        const url = "@Url.Action("GetCourseByStudentId", "Student")" / + id;
+        $.get(url, function (data) {
+            //console.log(data);
+            $(".modal-body").html(data);
+            $("#exampleModalLabel").html(FirstName, LastName)
 
-    });
+        });
+    }
 </script>          

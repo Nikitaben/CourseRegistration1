@@ -16,7 +16,14 @@ namespace CourseRegistration.Data.SqlRepo
             _context = context;
         }
 
-        public void CreateCourseStudents(CourseStudents input)
+      
+
+        public void CreateCourseStudent(CourseStudents input)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeleteCourseStudents(int id)
         {
             throw new NotImplementedException();
         }
@@ -31,14 +38,27 @@ namespace CourseRegistration.Data.SqlRepo
             throw new NotImplementedException();
         }
 
+      
         public bool SaveChanges()
         {
             return _context.SaveChanges() >= 0;
         }
 
-        public void UpdateCourseStudents(ICourseStudentsRepo input)
+        public void UpdateCourseStudent(CourseStudents input)
         {
             throw new NotImplementedException();
         }
+        public void AddRange(IEnumerable<CourseStudents> range)
+        {
+            _context.AddRange(range);
+        }
+
+        public void RemoveRange(int StudentId)
+        {
+            var rangeToRemove = _context.CourseStudents
+                 .Where(cs => cs.StudentId == StudentId);
+            _context.RemoveRange(rangeToRemove);
+        }
+
     }
 }

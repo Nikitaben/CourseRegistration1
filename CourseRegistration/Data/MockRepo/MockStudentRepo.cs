@@ -22,6 +22,8 @@ namespace CourseRegistration.Data.MockRepo
         };
         public void CreateStudent(Student input)
         {
+            int id = _students.Max(s => s.StudentId) + 1;
+            input.StudentId = id;
             _students.Add(input);
         }
         public IEnumerable<Student> GetAllStudents()

@@ -10,8 +10,12 @@ namespace CourseRegistration.Data.Interfaces
     {
         IEnumerable<CourseStudents> GetAllCourseStudents();
         CourseStudents GetCourseStudentsById(int id);
-        void CreateCourseStudents(CourseStudents input);
-        void UpdateCourseStudents(ICourseStudentsRepo input);
+        void CreateCourseStudent(CourseStudents input);
+        void UpdateCourseStudent(CourseStudents input);
+        void DeleteCourseStudents(int id);
         bool SaveChanges();
+
+        void RemoveRange(int StudentId);
+        void AddRange(IEnumerable<CourseStudents> range);
     }
 }

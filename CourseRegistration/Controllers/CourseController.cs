@@ -2,6 +2,7 @@
 using CourseRegistration.Data.Interfaces;
 using CourseRegistration.Models;
 using CourseRegistration.ModelsDto;
+using CourseRegistration.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ namespace CourseRegistration.Controllers
 {
     public class CourseController : Controller
     {
-        private ICourseRepo _courseRepo;
+        private readonly ICourseRepo _courseRepo;
         private readonly Mapper _mapper = new Mapper();
         public CourseController(ICourseRepo courseRepo)
         {
@@ -34,7 +35,7 @@ namespace CourseRegistration.Controllers
         [HttpPost]
         public ActionResult Create(Course input)
         {
-            _courseRepo.CreateCourse(input);
+            _courseRepo.CreateCourse(_mapper.Map(input));
             _courseRepo.SaveChanges();
             return RedirectToAction(nameof(Index));
         }
@@ -51,6 +52,7 @@ namespace CourseRegistration.Controllers
             _courseRepo.SaveChanges();
             return RedirectToAction(nameof(Index));
         }
+       
     }
 
 }

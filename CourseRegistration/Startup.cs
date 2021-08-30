@@ -34,11 +34,14 @@ namespace CourseRegistration
                 options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString));
 
             });
-            services.AddScoped<IInstructorRepo, MockInstructorRepo>();
-           // services.AddScoped<IStudentRepo, MockStudentRepo>();
+            services.AddScoped<IInstructorRepo, SqlInstructorRepo>();
+            //            services.AddScoped<IInstructorRepo, MockInstructorRepo>();
+
+            // services.AddScoped<IStudentRepo, MockStudentRepo>();
             services.AddScoped<IStudentRepo, SqlStudentRepo>();
             //.AddScoped<ICourseRepo, MockCourseRepo>();
             services.AddScoped<ICourseRepo, SqlCourseRepo>();
+            services.AddScoped<ICourseStudentsRepo, SqlCourseStudentsRepo>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
