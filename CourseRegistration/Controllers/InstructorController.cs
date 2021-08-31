@@ -65,7 +65,7 @@ namespace CourseRegistration.Controllers
         [HttpPost]
         public ActionResult Create(InstructorDto input)
         {
-            if (ModelState.IsValid)
+            
             _instructorRepo.CreateInstructor(_mapper.Map(input));
             _instructorRepo.SaveChanges();
             return RedirectToAction(nameof(Index));
