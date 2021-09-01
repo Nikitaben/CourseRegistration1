@@ -27,9 +27,9 @@ namespace CourseRegistration.Data.SqlRepo
 
                 );
             modelBuilder.Entity<Instructor>().HasData(
-            new Instructor { I_Id = 101, FirstName = "Mark", LastName = "Johnson", EmailAddress = "markjohnson@gmail.com"},
-            new Instructor { I_Id = 102, FirstName = "Lucy", LastName = "Smith", EmailAddress = "lucysmith@gmail.com" },
-            new Instructor { I_Id = 103, FirstName = "Trecy", LastName = "Brown", EmailAddress = "trecybrown@gmail.com" }
+            new Instructor { I_Id = 101, FirstName = "Mark", LastName = "Johnson", EmailAddress = "markjohnson@gmail.com",CourseId = 1001},
+            new Instructor { I_Id = 102, FirstName = "Lucy", LastName = "Smith", EmailAddress = "lucysmith@gmail.com", CourseId = 1002 },
+            new Instructor { I_Id = 103, FirstName = "Trecy", LastName = "Brown", EmailAddress = "trecybrown@gmail.com", CourseId = 1003 }
                 );
 
             modelBuilder.Entity<Student>().HasData(

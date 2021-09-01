@@ -96,8 +96,9 @@
 
 <script>
     function AddCourse(id, FirstName, LastName) {
-        const url = "@Url.Action("GetCourseByStudentId", "Student")" / + id;
-        $.get(url, function (data) {
+        const url = "@Url.Action("GetCourseStudentById", "Student")/" + id;
+        console.log(url);
+        $.get(url, function(data) {
             //console.log(data);
             $(".modal-body").html(data);
             $("#exampleModalLabel").html(FirstName, LastName)
