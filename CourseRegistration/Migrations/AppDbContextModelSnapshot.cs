@@ -108,7 +108,7 @@ namespace CourseRegistration.Migrations
                         new
                         {
                             I_Id = 101,
-                            CourseId = 0,
+                            CourseId = 1001,
                             EmailAddress = "markjohnson@gmail.com",
                             FirstName = "Mark",
                             LastName = "Johnson"
@@ -116,7 +116,7 @@ namespace CourseRegistration.Migrations
                         new
                         {
                             I_Id = 102,
-                            CourseId = 0,
+                            CourseId = 1002,
                             EmailAddress = "lucysmith@gmail.com",
                             FirstName = "Lucy",
                             LastName = "Smith"
@@ -124,7 +124,7 @@ namespace CourseRegistration.Migrations
                         new
                         {
                             I_Id = 103,
-                            CourseId = 0,
+                            CourseId = 1003,
                             EmailAddress = "trecybrown@gmail.com",
                             FirstName = "Trecy",
                             LastName = "Brown"

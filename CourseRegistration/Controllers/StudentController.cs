@@ -95,7 +95,7 @@ namespace CourseRegistration.Controllers
             _studentRepo.SaveChanges();
             return View(student);
         }
-        public ActionResult GetCourseStudentById(int id)
+        public ActionResult RemoveAddCourseByStudentId(int id)
         {
             var list = _courseStudentRepo.GetAllCourseStudents();
             var courses = _courseRepo.GetAllCourses()

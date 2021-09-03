@@ -96,7 +96,7 @@
 
 <script>
     function AddCourse(id, FirstName, LastName) {
-        const url = "@Url.Action("GetCourseStudentById", "Student")/" + id;
+        const url = "@Url.Action("RemoveAddCourseByStudentId", "Student")/" + id;
         console.log(url);
         $.get(url, function(data) {
             //console.log(data);
