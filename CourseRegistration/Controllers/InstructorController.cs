@@ -63,12 +63,15 @@ namespace CourseRegistration.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Create(InstructorDto input)
+        public ActionResult Create(InstructorDto instructor)
         {
-            
-            _instructorRepo.CreateInstructor(_mapper.Map(input));
-            _instructorRepo.SaveChanges();
-            return RedirectToAction(nameof(Index));
+            if (ModelState.IsValid)
+            {
+                _instructorRepo.CreateInstructor(_mapper.Map(instructor));
+                _instructorRepo.SaveChanges();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(instructor);
         }
         public ActionResult Edit(int id)
         {

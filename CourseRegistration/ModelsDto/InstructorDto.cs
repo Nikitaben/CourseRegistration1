@@ -24,8 +24,9 @@ namespace CourseRegistration.ModelsDto
         [Required]
         public string LastName { get; set; }
         [DisplayName("E_Address")]
+        [EmailAddress]
         public string EmailAddress { get; set; }
-        [DisplayName("Courses")]
+        [DisplayName("Course Id")]
         
         public int CourseId { get; set; }
         public CourseDto Course { get; set; }

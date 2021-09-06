@@ -65,16 +65,20 @@ namespace CourseRegistration.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Create(StudentDto input)
+        public ActionResult Create(StudentDto student)
         {
-            
-            
-                _studentRepo.CreateStudent(_mapper.Map(input));
+
+            if (ModelState.IsValid)
+            {
+
+
+                _studentRepo.CreateStudent(_mapper.Map(student));
                 _studentRepo.SaveChanges();
 
                 return RedirectToAction(nameof(Index));
-            
-           
+
+            }
+            return View(student);
         }
         public ActionResult Edit(int id)
         {
